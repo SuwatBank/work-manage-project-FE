@@ -1,17 +1,28 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import useUserStore from "./userStore";
-import { createTask, getTask } from "../api/taskApi";
+import { createTask, getAllTasks, submitTask } from "../api/taskApi";
+
+let token = useUserStore.getState().token
 
 const taskManageStore = create(persist((set, get) => ({
   tasks: [],
-  getTask: async () => {
-    const result = await getTask(token)
-    set({ projects: result.data.tasks })
+  getAllTasks: async (id) => {
+    const result = await getAllTasks(id, token)
+    set({ tasks: result.data.tasks})
     return result
   },
-  createTask: async () => {
-    const result = await createTask(token)
-
+  createTask: async (id, body, token) => {
+    console.log(id);
+    const result = await createTask(id, body, token)
+    get().getAllTasks(id, token)
+    return result
+  },
+  submitTask: async (id, body, token) => {
+    const result = await submitTask(id, body, token)
+    get().getAllTasks(id, token)
+    return result
   }
 })))
+
+export default taskManageStore

@@ -14,7 +14,7 @@ function Login() {
   const hdlLogin = async(data) => {
     try {
       const response = await login(data)
-      localStorage.setItem("user", JSON.stringify(response.data.user))
+      // localStorage.setItem("user", JSON.stringify(response.data.user))
       toast.success(response.data.message)
       
     } catch (error) {
@@ -29,10 +29,10 @@ function Login() {
           <h1 className='text-red-400 text-4xl font-bold '>Work management</h1>
           <p className='font-bold'>Help to manage and track you work</p>
         </div>
-          <div className='card bg-base-300 shadow-xl justify-center'>
+          <div className='card shadow-xl justify-center'>
             <form onSubmit={handleSubmit(hdlLogin)}>
               <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-                <legend className="fieldset-legend">Login</legend>
+                <legend className="fieldset-legend text-lg">Login</legend>
 
                 <label className="label">Username</label>
                 {errors.userName?.message && <p className='text-sm text-error'>{errors.userName.message}</p>}

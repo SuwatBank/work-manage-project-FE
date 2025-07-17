@@ -15,37 +15,79 @@ import UserList from "../pages/UserList";
 import UpdateUserForm from "../pages/UpdateUserForm";
 import AssignProjectList from "../pages/AssignProjectList";
 import MemberList from "../pages/MemberList";
+import TaskList from "../pages/TaskList";
 
 const guestRouter = createBrowserRouter([
-  {path : "/", element: <Login/>},
-  {path : "/register", element: <Register/>},
-  {path : "*", element: <Navigate to="/"/>}
-])
+  { path: "/", element: <Login /> },
+  { path: "/register", element: <Register /> },
+  { path: "*", element: <Navigate to="/" /> }
+]);
 
 const userRouter = createBrowserRouter([
-  {path : "/", element: <UserSidebar/>,
-  children: [
-    {path : "/", element: <Home/>},
-    {path : "/profile", element: <Profile/>},
-    {path : "/dashboard", element: <Dashboard/>},
-    {path : "/projectlist", element: <ProjectList/>},
-    {path : "/pendinglist", element: <RequestPendingList/>},
-    {path : "/submitlist", element: <SubmitList/>},
-    {path : "/approvallist", element: <ApprovalList/>},
-    {path : "/assignproject", element: <AssignProjectList/>},
-    {path : "/addproject", element: <AddProject/>},
-    {path : "/userlist", element: <UserList/>},
-    {path : "/memberlist", element: <MemberList/>},
-    {path : "/userlist/updateUser", element: <UpdateUserForm/>},
-  ]
+  {
+    path: "/", element: <UserSidebar />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/profile", element: <Profile /> },
+      { path: "/dashboard", element: <Dashboard /> },
+      { path: "/projectlist", element: <ProjectList /> },
+      { path: "/pendinglist", element: <RequestPendingList /> },
+      { path: "/submitlist", element: <SubmitList/> },
+      { path: "/tasklist/:projectId", element: <TaskList /> },
+      { path: "*", element: <Navigate to="/" /> }
+    ]
   }
-])
+]);
 
-function AppRouter(){
+const leaderRouter = createBrowserRouter([
+  {
+    path: "/", element: <UserSidebar />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/profile", element: <Profile /> },
+      { path: "/dashboard", element: <Dashboard /> },
+      { path: "/projectlist", element: <ProjectList /> },
+      { path: "/pendinglist", element: <RequestPendingList /> },
+      { path: "/submitlist", element: <SubmitList /> },
+      { path: "/approvallist", element: <ApprovalList /> },
+      { path: "/assignproject", element: <AssignProjectList /> },
+      { path: "/addproject", element: <AddProject /> },
+      { path: "/tasklist/:projectId", element: <TaskList /> },
+      { path: "/memberlist", element: <MemberList /> },
+      { path: "*", element: <Navigate to="/" /> }
+    ]
+  }
+]);
+
+const adminRouter = createBrowserRouter([
+  {
+    path: "/", element: <UserSidebar />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/profile", element: <Profile /> },
+      { path: "/dashboard", element: <Dashboard /> },
+      { path: "/projectlist", element: <ProjectList /> },
+      { path: "/pendinglist", element: <RequestPendingList /> },
+      { path: "/userlist", element: <UserList /> },
+      { path: "/userlist/updateUser/:id", element: <UpdateUserForm /> },
+      { path: "*", element: <Navigate to="/" /> }
+    ]
+  }
+]);
+
+function AppRouter() {
   const user = useUserStore(state => state.user)
-  const selectRouter = user ? userRouter : guestRouter
-  return(
-    <RouterProvider router={selectRouter}/>
+  // const selectRouter = user ? userRouter : guestRouter;
+
+  const selectRouter = (
+    user?.role == "ADMIN" ? adminRouter 
+    : user?.role == "LEADER" ? leaderRouter 
+    : user?.role == "USER" ? userRouter 
+    : guestRouter
+  );
+
+  return (
+    <RouterProvider router={selectRouter} />
   )
 }
 

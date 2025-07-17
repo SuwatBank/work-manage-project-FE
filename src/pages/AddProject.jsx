@@ -12,6 +12,7 @@ function AddProject() {
   console.log(allUsers)
   const currUser = useUserStore(state => state.user)
   const sortUsers = allUsers.filter(user => user.role !== "ADMIN" && user.department.toLowerCase() == currUser.department.toLowerCase())
+  console.log('sortUsers', sortUsers)
   const { handleSubmit, register } = useForm({
     defaultValues: {
       detail: "",

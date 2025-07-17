@@ -10,5 +10,7 @@ const addToken = (token) => ({
 
 export const getAllProjects = (token) => projectApi.get("/getProjects", addToken(token))
 export const getProject = (id, token) => projectApi.get(`/getProject/${id}`, addToken(token))
+export const projectNearDue = (id, token) => projectApi.get(`/projectNearDue/${id}`, addToken(token))
+export const newComingProject = (id, token) => projectApi.get(`/newComingProject/${id}`, addToken(token))
 export const assignProject = (id, token) => projectApi.get(`/assignProject/${id}`, addToken(token))
 export const createProject = (id, body, token) => projectApi.post(`/leader/assignProject/${id}`, body, addToken(token))

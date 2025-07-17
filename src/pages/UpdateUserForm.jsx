@@ -1,20 +1,46 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { updateSchema } from '../utils/validator'
 import { yupResolver } from '@hookform/resolvers/yup'
 import userManageStore from '../stores/userManageStore'
 import { toast } from 'react-toastify'
+import { useParams } from 'react-router'
+
+const initState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  phone: "",
+  department: "",
+  role: ""
+
+}
 
 function UpdateUserForm() {
+  const getUserId = userManageStore(state => state.getUserId)
+
+  const [user, setUser] = useState(initState)
   const { handleSubmit, register, formState } = useForm({
-    resolver: yupResolver(updateSchema)
+    resolver: yupResolver(updateSchema),
+    defaultValues: user
   })
+
+  const {id} = useParams()
+
+  useEffect(() => {
+    console.log('useeffect');
+    const getUserById = async() => {
+      const result = await getUserId(id)
+      setUser(result.data.Edituser)
+    }
+    getUserById()
+  },[])
 
   const updateUser = userManageStore(state => state.updateUser)
 
-  const handleUpdate = async () => {
+  const handleUpdate = async (data) => {
     try {
-      const response = await updateUser()
+      const response = await updateUser(id,data)
       toast.success(response.data.message)
     } catch (error) {
       const errorMessage = error.response?.data?.error || error.message

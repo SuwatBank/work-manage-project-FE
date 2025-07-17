@@ -9,14 +9,14 @@ function UserSidebar() {
   return (
     <div className='flex'>
       <div className='flex shadow-2xl flex-col mr-7 h-screen bg-[#FAF6E9] items-center p-5'>
-        <div className="avatar flex flex-col items-center">
-          <div className="w-20 rounded-full mt-5 mb-5">
-            <Link to={"profile"}>
+        <Link to={"profile"}>
+          <div className="avatar flex flex-col items-center">
+            <div className="w-20 rounded-full mt-5 mb-5">
               <img src="https://img.daisyui.com/images/profile/demo/yellingcat@192.webp" />
-            </Link>
+            </div>
+            <h1 className='text-xl mb-5'>{user.firstName}</h1>
           </div>
-          <h1 className='text-xl mb-5'>{user.firstName}</h1>
-        </div>
+        </Link>
         <div className="divider"></div>
         <ul className='menu bg-[#FAF6E9]'>
           <li>
@@ -34,71 +34,69 @@ function UserSidebar() {
           <li>
             <Link className='p-5 focus:bg-[#A0C878]' to={"projectlist"}>
               <TaskIcon className="w-6" />
-              My task
+              My Project
             </Link>
           </li>
-          
-          {user.role == "USER" && 
+
+          {user.role == "USER" &&
             <li>
-            <Link className='p-5 focus:bg-[#A0C878]' to={"pendinglist"}>
-              <PendingIcon className="w-6" />
-              Request pending
-            </Link>
-          </li>
+              <Link className='p-5 focus:bg-[#A0C878]' to={"pendinglist"}>
+                <PendingIcon className="w-6" />
+                Request pending
+              </Link>
+            </li>
           }
-          {user.role == "USER" && 
+          {user.role == "USER" &&
             <li>
-            <Link className='p-5 focus:bg-[#A0C878]' to={"submitlist"}>
-              <SubmitIcon className="w-6" />
-              Submit
-            </Link>
-          </li>
+              <Link className='p-5 focus:bg-[#A0C878]' to={"submitlist"}>
+                <SubmitIcon className="w-6" />
+                Submit
+              </Link>
+            </li>
           }
-          {user.role == "LEADER" && 
+          {user.role == "LEADER" &&
             <li>
-            <Link className='p-5 focus:bg-[#A0C878]' to={"assignproject"}>
-              <AssignIcon className="w-6" />
-              Assign project list
-            </Link>
-          </li>
+              <Link className='p-5 focus:bg-[#A0C878]' to={"assignproject"}>
+                <AssignIcon className="w-6" />
+                Assign project list
+              </Link>
+            </li>
           }
-          {user.role == "LEADER" && 
+          {user.role == "LEADER" &&
             <li>
-            <Link className='p-5 focus:bg-[#A0C878]' to={"addproject"}>
-              <AddworkIcon className="w-6" />
-              Add project
-            </Link>
-          </li>
+              <Link className='p-5 focus:bg-[#A0C878]' to={"addproject"}>
+                <AddworkIcon className="w-6" />
+                Add project
+              </Link>
+            </li>
           }
-          {user.role == "LEADER" && 
+          {user.role == "LEADER" &&
             <li>
-            <Link className='p-5 focus:bg-[#A0C878]' to={"approvallist"}>
-              <ApprovalIcon className="w-6" />
-              Approval List
-            </Link>
-          </li>
+              <Link className='p-5 focus:bg-[#A0C878]' to={"approvallist"}>
+                <ApprovalIcon className="w-6" />
+                Approval List
+              </Link>
+            </li>
           }
-          {user.role == "LEADER" && 
+          {user.role == "LEADER" &&
             <li>
-            <Link className='p-5 focus:bg-[#A0C878]' to={"memberlist"}>
-              <MemberIcon className="w-6" />
-              MemberList
-            </Link>
-          </li>
+              <Link className='p-5 focus:bg-[#A0C878]' to={"memberlist"}>
+                <MemberIcon className="w-6" />
+                MemberList
+              </Link>
+            </li>
           }
-          {user.role == "ADMIN" && 
+          {user.role == "ADMIN" &&
             <li>
-            <Link className='p-5 focus:bg-[#A0C878]' to={"userlist"}>
-              <MemberIcon className="w-6" />
-              UserList
-            </Link>
-          </li>
+              <Link className='p-5 focus:bg-[#A0C878]' to={"userlist"}>
+                <MemberIcon className="w-6" />
+                UserList
+              </Link>
+            </li>
           }
           <div className="divider"></div>
-          <li className='p-5'>Notification</li>
-          <li className='p-5'>Message</li>
           <li>
-            <a className='p-5' onClick={logout}><LogoutIcon className="w-6"/>Logout</a>
+            <a className='p-5' onClick={logout}><LogoutIcon className="w-6" />Logout</a>
           </li>
         </ul>
       </div>
