@@ -1,11 +1,12 @@
 import {create} from "zustand"
 import useUserStore from "./userStore"
-import { assignProject, createProject, getAllProjects, getProject, newComingProject, projectNearDue } from "../api/projectApi"
+import { assignProject, createProject, getAllProjects, getProject, newComingProject, projectNearDue, removeProject, updateProject } from "../api/projectApi"
 
 let token = useUserStore.getState().token
 
 const projectManageStore = create((set,get) => ({
   projects : [],
+  assignProjects : [],
   newProjects: [],
   getAllProjects : async() => {
     const result = await getAllProjects(token)
@@ -33,12 +34,24 @@ const projectManageStore = create((set,get) => ({
 
   assignProject : async(id) => {
     const result = await assignProject(id, token)
-    set({projects: result.data.result})
+    set({assignProjects: result.data.result})
     return result
   },
 
   createProject : async(id, body, token) => {
     const result = await createProject(id, body, token)
+    get().getAllProjects()
+    return result
+  },
+
+  removeProject : async(id, token) => {
+    const result = await removeProject(id, token)
+    get().getAllProjects()
+    return result
+  },
+  
+  updateProject : async (id, body, token) => {
+    const result = await updateProject(id, body, token)
     get().getAllProjects()
     return result
   }

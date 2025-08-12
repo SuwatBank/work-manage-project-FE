@@ -5,6 +5,7 @@ import { loginSchema } from '../utils/validator'
 import useUserStore from '../stores/userStore'
 import { toast } from 'react-toastify'
 
+
 function Login() {
   const login = useUserStore(state => state.login)
   const {handleSubmit, register, formState : {errors, isSubmitting}} = useForm({
@@ -18,10 +19,13 @@ function Login() {
       toast.success(response.data.message)
       
     } catch (error) {
-        const errMessage = error.response?.data?.error || error.message;
+        const errMessage = error.response?.data || error.message;
+        console.log(error);
         toast(errMessage)
     }
   }
+
+  
   return (
     <div className='p-65 max-w-screen'>
       <div className="max-w-screen-lg max-md:flex-col flex flex-row gap-10 justify-around">

@@ -4,7 +4,7 @@ import { updateSchema } from '../utils/validator'
 import { yupResolver } from '@hookform/resolvers/yup'
 import userManageStore from '../stores/userManageStore'
 import { toast } from 'react-toastify'
-import { useParams } from 'react-router'
+import { Link, useParams } from 'react-router'
 
 const initState = {
   firstName: "",
@@ -18,7 +18,7 @@ const initState = {
 
 function UpdateUserForm() {
   const getUserId = userManageStore(state => state.getUserId)
-
+  
   const [user, setUser] = useState(initState)
   const { handleSubmit, register, formState } = useForm({
     resolver: yupResolver(updateSchema),
@@ -35,6 +35,7 @@ function UpdateUserForm() {
     }
     getUserById()
   },[])
+  console.log(user)
 
   const updateUser = userManageStore(state => state.updateUser)
 
@@ -60,6 +61,8 @@ function UpdateUserForm() {
                   <input type="text"
                     className="input"
                     placeholder="First name"
+                    // value={user.firstName}
+                    // onChange={(e) => setUser(e.target.value)}
                     {...register("firstName")}
                   />
                 </div>

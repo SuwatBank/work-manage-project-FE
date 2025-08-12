@@ -16,6 +16,7 @@ import UpdateUserForm from "../pages/UpdateUserForm";
 import AssignProjectList from "../pages/AssignProjectList";
 import MemberList from "../pages/MemberList";
 import TaskList from "../pages/TaskList";
+import UserTaskList from "../pages/UserTaskList";
 
 const guestRouter = createBrowserRouter([
   { path: "/", element: <Login /> },
@@ -31,6 +32,8 @@ const userRouter = createBrowserRouter([
       { path: "/profile", element: <Profile /> },
       { path: "/dashboard", element: <Dashboard /> },
       { path: "/projectlist", element: <ProjectList /> },
+      { path: "/usertasklist", element: <UserTaskList /> },
+      { path: "/profile/updateUser/:id", element: <UpdateUserForm /> },
       { path: "/pendinglist", element: <RequestPendingList /> },
       { path: "/submitlist", element: <SubmitList/> },
       { path: "/tasklist/:projectId", element: <TaskList /> },
@@ -47,10 +50,12 @@ const leaderRouter = createBrowserRouter([
       { path: "/profile", element: <Profile /> },
       { path: "/dashboard", element: <Dashboard /> },
       { path: "/projectlist", element: <ProjectList /> },
+      { path: "/usertasklist", element: <UserTaskList /> },
       { path: "/pendinglist", element: <RequestPendingList /> },
       { path: "/submitlist", element: <SubmitList /> },
       { path: "/approvallist", element: <ApprovalList /> },
       { path: "/assignproject", element: <AssignProjectList /> },
+      { path: "/profile/updateUser/:id", element: <UpdateUserForm /> },
       { path: "/addproject", element: <AddProject /> },
       { path: "/tasklist/:projectId", element: <TaskList /> },
       { path: "/memberlist", element: <MemberList /> },

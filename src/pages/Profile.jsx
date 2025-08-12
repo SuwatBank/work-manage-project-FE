@@ -1,3 +1,4 @@
+import { Link } from "react-router"
 import useUserStore from "../stores/userStore"
 
 function Profile() {
@@ -36,6 +37,18 @@ function Profile() {
           <p className="text-xl">{user.role}</p>
         </div>
       </div>
+      <div>
+        <Link className="btn btn-warning mr-2 col-start-4 col-end-5" to={`updateUser/${user.id}`}><button>Edit Profile</button></Link>
+        {/* <button className="p-5 bg-amber-300">Edit Profile</button> */}
+      </div>
+      <dialog id="edit-form" className="modal">
+        <div className="modal-box">
+          {/* <AddTask close={close} /> */}
+          <form method="dialog">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+          </form>
+        </div>
+      </dialog>
     </div>
   )
 }

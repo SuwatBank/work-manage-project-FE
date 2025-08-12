@@ -7,12 +7,10 @@ import SubmitPage from "./SubmitPage"
 import PendingPage from "./PendingPage"
 import { toast } from "react-toastify"
 
-function TaskList() {
+function UserTaskList() {
   const { projectId } = useParams();
   const token = useUserStore(state => state.token)
-  const allProjects = projectManageStore(state => state.getProject)
-  const projects = projectManageStore(state => state.projects)
-  const allTasks = taskManageStore(state => state.getAllTasks)
+  const allUserTask = taskManageStore(state => state.getAllUserTask)
   const removeTask = taskManageStore(state => state.removeTask)
   const user = useUserStore(state => state.user)
   const tasks = taskManageStore(state => state.userTasks)
@@ -41,11 +39,11 @@ function TaskList() {
 
   useEffect(() => {
     const run = async () => {
-      await allProjects(user.id, token)
-      await allTasks(projectId, token)
+      await allUserTask(user.id, token)
     }
     run()
   }, [])
+
   return (
     <>
       <div>
@@ -83,8 +81,8 @@ function TaskList() {
                       <td>
                         <div className="flex items-center gap-3">
                           <div>
-                            <div className="font-bold">{task.Task.name}</div>
-                            <div className="text-sm opacity-50">{task.Task.detail}</div>
+                            <div className="font-bold">{task.name}</div>
+                            <div className="text-sm opacity-50">{task.detail}</div>
                           </div>
                         </div>
                       </td>
@@ -100,7 +98,7 @@ function TaskList() {
                         <div>{new Date(task.dueDate).toLocaleDateString("th-th")}</div>
                       </td>
                       <td>
-                        <span className="badge badge-warning badge-lg text-white">{task.status[0]?.taskStatus}</span>
+                        {/* <span className="badge badge-warning badge-lg text-white">{task.status[0]?.taskStatus}</span> */}
                       </td>
                       <td>
                         <div className="dropdown dropdown-center dropdown-end">
@@ -149,4 +147,4 @@ function TaskList() {
   )
 }
 
-export default TaskList
+export default UserTaskList

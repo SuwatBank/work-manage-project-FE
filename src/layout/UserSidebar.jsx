@@ -37,6 +37,12 @@ function UserSidebar() {
               My Project
             </Link>
           </li>
+          <li>
+            <Link className='p-5 focus:bg-[#A0C878]' to={"usertasklist"}>
+              <TaskIcon className="w-6" />
+              My Task
+            </Link>
+          </li>
 
           {user.role == "USER" &&
             <li>

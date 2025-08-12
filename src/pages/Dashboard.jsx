@@ -36,7 +36,7 @@ function Dashboard() {
             <h2 className="card-title font-bold text-2xl mb-5">Completed Project</h2>
             <div className='flex flex-row justify-between'>
               <p className='text-lg mb-5'>List of project</p>
-              <p className='text-lg mb-5'>Total : 20</p>
+              <p className='text-lg mb-5'>Total : {projects.filter((completeProject) => completeProject.projectStatus == "COMPLETED").length}</p>
             </div>
             <div className="card-actions justify-start">
               <button className="btn">View detail</button>
@@ -48,7 +48,7 @@ function Dashboard() {
             <h2 className="card-title font-bold text-2xl mb-5">Frozen Project</h2>
             <div className='flex flex-row justify-between'>
               <p className='text-lg mb-5'>List of project</p>
-              <p className='text-lg mb-5'>Total : 5</p>
+              <p className='text-lg mb-5'>Total : {projects.filter((completeProject) => completeProject.projectStatus == "PENDING").length}</p>
             </div>
             <div className="card-actions justify-start">
               <button className="btn">View detail</button>
@@ -60,7 +60,7 @@ function Dashboard() {
             <h2 className="card-title font-bold text-2xl mb-5">In progress</h2>
             <div className='flex flex-row justify-between'>
               <p className='text-lg mb-5'>List of project</p>
-              <p className='text-lg mb-5'>Total : 10</p>
+              <p className='text-lg mb-5'>Total : {projects.filter((completeProject) => completeProject.projectStatus == "ONGOING").length}</p>
             </div>
             <div className="card-actions justify-start">
               <button className="btn">View detail</button>
@@ -72,7 +72,7 @@ function Dashboard() {
             <h2 className="card-title font-bold text-2xl mb-5">Over due</h2>
             <div className='flex flex-row justify-between'>
               <p className='text-lg mb-5'>List of project</p>
-              <p className='text-lg mb-5'>Total : 5</p>
+              <p className='text-lg mb-5'>Total : {projects.filter((completeProject) => completeProject.projectStatus == "OVERDUE").length}</p>
             </div>
             <div className="card-actions justify-start">
               <button className="btn">View detail</button>

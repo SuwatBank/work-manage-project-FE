@@ -2,14 +2,14 @@ import { useEffect } from 'react'
 import useUserStore from '../stores/userStore'
 import projectManageStore from '../stores/projectManageStore'
 import ProjectNearDue from './ProjectNearDue'
-import NewComingProject from './NewComingProject'
+import NewComingProject from './NewComingProject';
 
 function Home() {
   const token = useUserStore(state => state.token)
   const user = useUserStore(state => state.user)
   const allProjects = projectManageStore(state => state.getProject)
   const projects = projectManageStore(state => state.projects)
-  console.log("user", user)
+  // console.log("user", user)
 
 
   useEffect(() => {
