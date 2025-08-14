@@ -4,7 +4,6 @@ import { AddworkIcon, ApprovalIcon, AssignIcon, DashboardIcon, HomeIcon, LogoutI
 
 function UserSidebar() {
   const user = useUserStore(state => state.user)
-  // console.log(user)
   const logout = useUserStore(state => state.logout)
   return (
     <div className='flex'>
@@ -81,6 +80,14 @@ function UserSidebar() {
               <Link className='p-5 focus:bg-[#A0C878]' to={"approvallist"}>
                 <ApprovalIcon className="w-6" />
                 Approval List
+              </Link>
+            </li>
+          }
+          {user.role == "LEADER" &&
+            <li>
+              <Link className='p-5 focus:bg-[#A0C878]' to={"pendinglist"}>
+                <ApprovalIcon className="w-6" />
+                Pending List
               </Link>
             </li>
           }

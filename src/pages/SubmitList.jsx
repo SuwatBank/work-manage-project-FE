@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import useUserStore from '../stores/userStore'
 import taskManageStore from '../stores/taskManageStore';
 
@@ -15,21 +15,17 @@ function SubmitList() {
     run()
   }, []);
   console.log('task', tasks)
+
   if (tasks.length > 0) {
     return (
       <>
         <div>
           <h1 className='text-2xl font-bold mt-5 mb-5'>Submit List</h1>
-          <div className="overflow-x-auto rounded-2xl shadow-2xl">
+          <div className="rounded-2xl shadow-2xl">
             <table className="table pb-6 ">
               {/* head */}
               <thead>
                 <tr>
-                  <th>
-                    <label>
-                      <input type="checkbox" className="checkbox" />
-                    </label>
-                  </th>
                   <th>Taskname</th>
                   <th className='w-1/5'>
                     <fieldset className="fieldset">
@@ -53,22 +49,17 @@ function SubmitList() {
                   </th>
                   <th>Submit to</th>
                   <th>Submit status</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 {/* row 1 */}
-                {tasks.map((task) => {
+                {tasks.map((task) =>
                   <tr>
-                    <th>
-                      <label>
-                        <input type="checkbox" className="checkbox" />
-                      </label>
-                    </th>
                     <td>
                       <div className="flex items-center gap-3">
                         <div>
-                          <div className="font-bold"></div>
-                          <div className="text-sm opacity-50">project detail</div>
+                          <div className="font-bold">{task.name}</div>
                         </div>
                       </div>
                     </td>
@@ -77,16 +68,31 @@ function SubmitList() {
                         {task.priority == 1 ? "High" : task.priority == 2 ? "Medium" : "Low"}
                       </span>
                     </td>
-                    <td></td>
+                    <td>
+                      <div>{new Date(task.createAt).toLocaleDateString("th-th")}</div>
+                    </td>
                     <th>
-                      <button className="btn btn-ghost btn-xs">details</button>
+                      <button className="btn btn-ghost btn-xs">{new Date(task.dueDate).toLocaleDateString("th-th")}</button>
                     </th>
                     <td>
-                      <span className="badge badge-warning badge-lg text-white">In process</span>
+                      <span className="badge badge-warning badge-lg text-white">{task.taskStatus}</span>
+                    </td>
+                    <td>
+                      {user.role == "LEADER" &&
+                        <div className="dropdown dropdown-center dropdown-end">
+                          <button className="btn btn-square btn-ghost">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block h-5 w-5 stroke-current"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path> </svg>
+                          </button>
+                          <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm abs ">
+                            <li className='p-3 cursor-pointer hover:bg-base-300' onClick={() => hdlupdateTask(task.id, "APPROVE")}>Approve Project</li>
+                            <li className='p-3 cursor-pointer hover:bg-base-300' onClick={() => hdlupdateTask(task.id, "REJECT")}>Reject Project</li>
+                          </ul>
+
+                        </div>
+                      }
                     </td>
                   </tr>
-                })}
-
+                )}
               </tbody>
             </table>
           </div>

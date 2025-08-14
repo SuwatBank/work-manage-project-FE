@@ -29,9 +29,9 @@ function NewComingProject() {
                 <p>Detail : {project.detail}</p>
                 <p className='font-bold underline'>Create date : {new Date(project.createAt).toLocaleDateString("th-th")}</p>
                 <p className='font-bold underline mb-6'>Due date : {new Date(project.dueDate).toLocaleDateString("th-th")}</p>
-                <div className="card-actions justify-start">
+                {/* <div className="card-actions justify-start">
                   <button className="btn btn-[#E8FFD7] ">Submit</button>
-                </div>
+                </div> */}
               </div>
             </div>
             )

@@ -45,6 +45,7 @@ const projectManageStore = create((set,get) => ({
   },
 
   removeProject : async(id, token) => {
+    console.log('issssd', id)
     const result = await removeProject(id, token)
     get().getAllProjects()
     return result

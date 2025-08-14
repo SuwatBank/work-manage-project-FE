@@ -26,9 +26,9 @@ function Dashboard() {
               <p className='text-lg mb-5'>List of project</p>
               <p className='text-lg mb-5'>Total : {projects.length}</p>
             </div>
-            <div className="card-actions justify-start">
+            {/* <div className="card-actions justify-start">
               <button className="btn">View detail</button>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="card bg-success text-primary-content w-90 mr-5 mb-5">
@@ -38,9 +38,9 @@ function Dashboard() {
               <p className='text-lg mb-5'>List of project</p>
               <p className='text-lg mb-5'>Total : {projects.filter((completeProject) => completeProject.projectStatus == "COMPLETED").length}</p>
             </div>
-            <div className="card-actions justify-start">
+            {/* <div className="card-actions justify-start">
               <button className="btn">View detail</button>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="card bg-zinc-400 text-primary-content w-90 mr-5 mb-5">
@@ -50,9 +50,9 @@ function Dashboard() {
               <p className='text-lg mb-5'>List of project</p>
               <p className='text-lg mb-5'>Total : {projects.filter((completeProject) => completeProject.projectStatus == "PENDING").length}</p>
             </div>
-            <div className="card-actions justify-start">
+            {/* <div className="card-actions justify-start">
               <button className="btn">View detail</button>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="card bg-warning text-primary-content w-90 mr-5 mb-5">
@@ -62,9 +62,9 @@ function Dashboard() {
               <p className='text-lg mb-5'>List of project</p>
               <p className='text-lg mb-5'>Total : {projects.filter((completeProject) => completeProject.projectStatus == "ONGOING").length}</p>
             </div>
-            <div className="card-actions justify-start">
+            {/* <div className="card-actions justify-start">
               <button className="btn">View detail</button>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="card bg-error text-primary-content w-90 mr-5 mb-5">
@@ -74,9 +74,9 @@ function Dashboard() {
               <p className='text-lg mb-5'>List of project</p>
               <p className='text-lg mb-5'>Total : {projects.filter((completeProject) => completeProject.projectStatus == "OVERDUE").length}</p>
             </div>
-            <div className="card-actions justify-start">
+            {/* <div className="card-actions justify-start">
               <button className="btn">View detail</button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

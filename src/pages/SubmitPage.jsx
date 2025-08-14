@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import taskManageStore from '../stores/taskManageStore'
 import { toast } from 'react-toastify';
 import userManageStore from '../stores/userManageStore';
 
 function SubmitPage({ close, id }) {
+  console.log("iddddd", id);
   const tasks = taskManageStore(state => state.tasks);
   const token = userManageStore(state => state.token)
   const allTask = taskManageStore(state => state.getAllTasks)
-  const submitTask = taskManageStore(state => state.submitTask)
+  const updateTask = taskManageStore(state => state.updateTask);
   const { handleSubmit, register, formState, reset } = useForm({
     defaultValues: {
-      feedback: "",
       taskStatus: ""
     }
   })
@@ -23,7 +23,7 @@ function SubmitPage({ close, id }) {
 
   const submitData = async (data) => {
     try {
-      const response = await submitTask(id, data, token)
+      const response = await updateTask(id, data, token)
       toast.success(response.data.message)
       document.getElementById("submit-form").close()
     } catch (error) {
@@ -38,15 +38,12 @@ function SubmitPage({ close, id }) {
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-sm border p-4 flex flex-col justify-center">
           <legend className="fieldset-legend">Submit details</legend>
 
-          {/* <label className="label">Task Name</label>
-          <input type="text" className="input" placeholder="Insert Task name"/> */}
+          {/* <label className="label">Feedback</label>
+          <textarea placeholder="Insert Your comment" className="textarea textarea-md" {...register("feedback")}></textarea> */}
 
-          <label className="label">Feedback</label>
-          <textarea placeholder="Insert Your comment" className="textarea textarea-md" {...register("feedback")}></textarea>
-
-          <legend className="fieldset-legend">Priority</legend>
+          <legend className="fieldset-legend">Status</legend>
           <select defaultValue="Select priority" className="select" {...register("taskStatus")}>
-            <option disabled={true}>Select priority</option>
+            <option disabled={true}>Select Status</option>
             <option value={"ONAPPROVE"}>On Approve</option>
           </select>
 

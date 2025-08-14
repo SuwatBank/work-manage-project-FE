@@ -1,6 +1,6 @@
 import useUserStore from '../stores/userStore'
 import taskManageStore from '../stores/taskManageStore';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 function ApproveList() {
@@ -9,13 +9,14 @@ function ApproveList() {
   const tasks = taskManageStore(state => state.submitList);
   const submitList = taskManageStore(state => state.submitTaskList);
   const updateTask = taskManageStore(state => state.updateTask);
+  const [updateStatus, setUpdateStatus] = useState(false)
 
   useEffect(() => {
     const run = async () => {
       await submitList(user.id, token)
     }
     run()
-  }, []);
+  }, [updateStatus]);
   console.log('tasks', tasks)
 
   const hdlupdateTask = async(taskId, taskStatus) => {
@@ -23,6 +24,7 @@ function ApproveList() {
       const data = {taskStatus: taskStatus}
       console.log(data);
       const response = await updateTask(taskId, data, token);
+      setUpdateStatus(!updateStatus)
       toast.success(response.data.message);
     } catch (error) {
       console.log(error);
@@ -80,7 +82,7 @@ function ApproveList() {
                     <button className="btn btn-ghost btn-xs">{new Date(task.dueDate).toLocaleDateString("th-th")}</button>
                   </th>
                   <td>
-                    <span className="badge badge-warning badge-lg text-white">{task.status[0]?.taskStatus}</span>
+                    <span className="badge badge-warning badge-lg text-white">{task.taskStatus}</span>
                   </td>
                   <td>
                     <div className="dropdown dropdown-center dropdown-end">

@@ -11,6 +11,7 @@ function AssignProjectList() {
   const assignProject = projectManageStore(state => state.assignProject);
   const projects = projectManageStore(state => state.assignProjects);
   const removeProject = projectManageStore(state => state.removeProject);
+  const [hdlProject, setHdlProject] = useState(false)
   const [sortProject, setSortProject] = useState(projects)
   const [selectProject, setSelectProject] = useState(null);
   
@@ -24,7 +25,7 @@ function AssignProjectList() {
       await assignProject(user.id, token)
     }
     run()
-  }, []);
+  }, [hdlProject]);
 
   const handleClose = () => {
     setClose(prv => !prv)
@@ -32,12 +33,14 @@ function AssignProjectList() {
 
   const updateProject = (id) => {
     document.getElementById("update-form").showModal()
+    setHdlProject(!hdlProject)
     setSelectProject(id)
   }
 
   const deleteProject = async(id) => {
     try {
       const response = await removeProject(id)
+      setHdlProject(!hdlProject)
       toast.success(response.data.message)
     } catch (error) {
       console.log(error)

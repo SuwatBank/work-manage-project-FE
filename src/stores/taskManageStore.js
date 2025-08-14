@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import useUserStore from "./userStore";
-import { createTask, getAllTasks, getAllUserTask, removeTask, submitTask, submitTaskList, updateTask } from "../api/taskApi";
+import { createTask, getAllTasks, getAllUserTask, pendingTaskList, removeTask, submitTask, submitTaskList, updateTask } from "../api/taskApi";
 
 let token = useUserStore.getState().token
 
@@ -9,12 +9,13 @@ const taskManageStore = create(persist((set, get) => ({
   tasks: [],
   submitList: [],
   userTasks: [],
+  pendingList: [],
   getAllTasks: async (id) => {
     const result = await getAllTasks(id, token)
     set({ tasks: result.data.tasks})
     return result
   },
-  getAllUserTask: async (id) => {
+  getAllUserTask: async (id, token) => {
     const result = await getAllUserTask(id, token)
     set({ userTasks: result.data.tasks})
     console.log("resulttttt", result.data.tasks);
@@ -32,6 +33,11 @@ const taskManageStore = create(persist((set, get) => ({
     get().getAllTasks(id, token)
     return result
   },
+  // pendingTask: async (id, body, token) => {
+  //   const result = await pendingTask(id, body, token)
+  //   get().getAllTasks(id, token)
+  //   return result
+  // },
   removeTask: async (id, token) => {
     const result = await removeTask(id, token)
     get().getAllTasks(id, token)
@@ -40,6 +46,13 @@ const taskManageStore = create(persist((set, get) => ({
   submitTaskList: async(id, token) => {
     const result = await submitTaskList(id, token)
     set({ submitList: result.data.result})
+    console.log("resulttttt", result.data);
+    return result
+  },
+  pendingTaskList: async(id, token) => {
+    const result = await pendingTaskList(id, token)
+    set({ pendingList: result.data.result})
+    console.log("resulttttt", result.data);
     return result
   },
   updateTask: async(id, body, token) => {
